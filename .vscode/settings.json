@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": "file:///Users/sayjeyhi/Desktop/Projects/github/tilty-card/.github/workflows/deploy.yml"
+    },
+    "editor.tabSize": 2
+}

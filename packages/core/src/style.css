@@ -1,0 +1,140 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f1f1f1;
+  flex-wrap: wrap;
+}
+
+#container {
+  perspective: 25px;
+}
+
+.beatiful-card {
+  display: flex;
+  width: 400px;
+  height: 250px;
+  position: relative;
+  border-radius: 20px;
+  background: #fff;
+  transition: transform 0.5s;
+  -webkit-transition: transform 0.5s;
+  box-shadow: 0 30px 35px -14px rgba(111, 208, 50, 0.58);
+}
+.beatiful-card:after, .beatiful-card:before {
+  content: " ";
+  position: absolute;
+  bottom: -13px;
+  left: 10px;
+  right: 10px;
+  margin: 0 5px;
+  background: #b8bd8d4f;
+  z-index: -3;
+  height: 13px;
+  will-change: transform;
+  transition: transform ease-in-out 0.3s;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+.beatiful-card:after {
+  background: rgba(184, 189, 141, 0.25);
+  height: 21px;
+  bottom: -22px;
+  right: 25px;
+  left: 25px;
+}
+.beatiful-card:hover:before, .beatiful-card:hover:after {
+  transform: translateY(-100%);
+}
+.beatiful-card:hover img {
+  transform: scale(1.08);
+}
+.beatiful-card .images {
+  position: absolute;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  width: 55%;
+  height: 100%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.beatiful-card .images img {
+  width: 100%;
+  transition: transform ease-in-out 0.3s;
+  filter: sepia(40%);
+  height: 100%;
+  will-change: transform;
+}
+.beatiful-card .holderPart {
+  position: absolute;
+  width: 45%;
+  z-index: 1;
+  height: 100%;
+  background: #fff;
+  border-radius: 20px;
+}
+.beatiful-card .holderPart svg {
+  position: absolute;
+  transform: rotate(270deg);
+  -webkit-filter: drop-shadow(0 12px 0px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 12px 0px rgba(0, 0, 0, 0.2));
+  left: 83%;
+  top: 0;
+  height: 100%;
+  width: auto;
+  z-index: 0;
+  transition: filter ease-in-out 0.3s;
+  will-change: filter;
+}
+.beatiful-card .holderPart:hover svg {
+  -webkit-filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+}
+.beatiful-card .holderPart .title {
+  font-size: 22px;
+  padding: 0 16px;
+  position: relative;
+  font-family: "Roboto", tahoma, sans-serif;
+  display: block;
+  z-index: 5;
+  transition: -webkit-transform 0.4s ease, -webkit-filter 0.4s ease;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  transition: transform 0.4s ease, filter 0.4s ease, -webkit-transform 0.4s ease, -webkit-filter 0.4s ease;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+}
+.beatiful-card .holderPart .callToActionButton {
+  color: #fff;
+  padding: 12px 18px;
+  background: #000;
+  border-radius: 8px;
+  font-family: "Roboto", tahoma, sans-serif;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  left: 17px;
+  top: 4px;
+}
+.beatiful-card .holderPart .callToActionButton:hover {
+  opacity: 0.8;
+}
+.beatiful-card .holderPart p {
+  height: 98px;
+  overflow-y: hidden;
+  text-overflow: ellipsis;
+  font-weight: 200;
+  padding: 0 16px;
+  font-family: "Roboto", tahoma, sans-serif;
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+}

@@ -1,0 +1,49 @@
+name: Build and Deploy
+
+on:
+  push:
+      branches:
+        - master
+
+jobs:
+  publish-package:
+
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=8192
+      NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+
+      - name: 🎢 Install
+        run: yarn install --force
+
+      - name: Change version
+        run: yarn run change-version
+
+      - name: 🧩 Build packages
+        run: yarn run build
+        env:
+          CI: true
+
+      - name: Add private packages PAT
+        run: |
+          echo //registry.npmjs.org/:_authToken="${{secrets.NPM_TOKEN}}" > .npmrc
+
+      - name: 🤖 Publish npm packages
+        run: npm run publish-npm
+
+      - name: Prepare file update
+        run: rsync -av --exclude=/node_modules --exclude=.npmrc --exclude=/.git --exclude='dist' --exclude='sprite' --exclude='component' . temp/
+
+      - name: 🚀 Deploy
+        uses: JamesIves/github-pages-deploy-action@3.6.2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: master
+          FOLDER: temp
+          CLEAN: true # Automatically remove deleted files from the deploy branch
